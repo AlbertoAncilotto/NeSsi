@@ -1,0 +1,4 @@
+pathlib
+numpy
+tensorflow
+torch
