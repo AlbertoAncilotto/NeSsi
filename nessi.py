@@ -37,13 +37,25 @@ def get_torch_size(model, input_size):
     model_profile= torchinfo.summary(model, input_size=input_size)
     return model_profile.total_mult_adds, model_profile.total_params
 
+def get_tflite_size(model):
+    import tflite_tools as tflt
+
+    if isinstance(model, bytes):
+        model = tflt.TFLiteModel.load_from_bytes(model)
+    else:
+        model = tflt.TFLiteModel.load_from_file(model)
+    macc, params = model.print_model_analysis(macs=True, size=True)
+    return macc, params
+
 def get_model_size(model, model_type='keras', input_size=None):
     if model_type=='keras':
         macc, params=get_keras_size(model)
     elif model_type=='torch':
         macc, params=get_torch_size(model, input_size)
+    elif model_type=='tflite':
+        macc, params=get_tflite_size(model)
     else:
-        print('type', model_type, 'not supported, possibilities: ["keras", "torch"]')
+        print('type', model_type, 'not supported, possibilities: ["keras", "torch", "tflite"]')
     validate(macc, params)
     
 def validate(macc, params):
