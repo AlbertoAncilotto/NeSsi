@@ -11,10 +11,19 @@ For tf/Keras models, the input size gets inferred from the first layer of the ne
 
 `nessi.get_model_size(model, 'keras')`
 
-For torch models, You need to specify the input size as a touple when calling `get_model_size`.
+For torch models, you need to specify the input size as a touple when calling `get_model_size`.
 
 [Torch]: 
 
 `import nessi`
 
 `nessi.get_model_size(net, 'torch' ,input_size=(1,3,320,320))`
+
+For tflite models, either pass the model path or the bytearray to `get_model_size`. 
+
+[TFLite]: 
+
+`import nessi`
+
+`nessi.get_model_size(tflite_model OR path/to/model.tflite, 'tflite')`
+
