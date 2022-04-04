@@ -306,7 +306,7 @@ class TFLiteModel:
         if op.opcode == BuiltinOperator.ADD:
             # TODO: not precise when inputs are of different shapes
             num_terms = len(op.inputs)
-            elems_per_term = prod(op.output.shape)
+            elems_per_term = np.prod(op.output.shape)
             loads = num_terms * elems_per_term
             compute = (num_terms - 1) * elems_per_term
         return mem_access_weight * loads + compute_weight * compute
