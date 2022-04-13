@@ -5,7 +5,7 @@ import numpy as np
 import tensorflow as tf
 
 MAX_MACC=30e6       #30M MACC
-MAX_PARAMS=128e4    #128K params
+MAX_PARAMS=128e3    #128K params
 
 
 def get_keras_size(model):
