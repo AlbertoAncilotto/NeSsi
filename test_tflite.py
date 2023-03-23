@@ -1,4 +1,4 @@
-from pickletools import optimize
+import numpy as np
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import nessi
@@ -17,7 +17,15 @@ model.add(layers.Conv2D(12, 1, use_bias=False))
 
 model.summary()
 
+
+def representative_dataset():
+    for _ in range(100):
+      data = np.random.rand(1, 320, 320, 3)
+      yield [data.astype(np.float32)]
+
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset
 tflite_model = converter.convert()
 
 # Get model size from bytearray data

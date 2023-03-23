@@ -1,6 +1,5 @@
-from pickletools import optimize
 import tensorflow as tf
-from tensorflow.keras import datasets, layers, models
+from tensorflow.keras import layers, models
 import nessi
 
 model = models.Sequential()
