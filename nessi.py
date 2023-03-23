@@ -61,7 +61,7 @@ def get_model_size(model, model_type='keras', input_size=None):
 def validate(macc, params):
     print('Model statistics:')
     print('MACC:\t \t %.3f' %  (macc/1e6), 'M')
-    print('Params:\t \t %.3f' %  (params/1e3), 'K\n')
+    print('Memory:\t \t %.3f' %  (params/1e3), 'K\n')
     if macc>MAX_MACC:
         print('[Warning] Multiply accumulate count', macc, 'is more than the allowed maximum of', int(MAX_MACC))
     if params>MAX_PARAMS:
